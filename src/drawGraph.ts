@@ -25,11 +25,8 @@ function drawNode(context: CanvasRenderingContext2D, p: Point){
 
 function getEdgeStart(p1: Point, p2: Point){
     const degree = Math.atan((p2.x - p1.x)/(p2.y - p1.y));
-    const x = NODE_RADIUS * Math.sin(degree);
-    const y = NODE_RADIUS * Math.cos(degree);
-    const xStart = (p2.x > p1.x) ? p1.x - x : p1.x + x;
-    const yStart = (p2.y > p1.y) ? p1.y + y : p1.y - y;
-    return new Point(xStart, yStart);
+    return new Point(p1.x + ((p2.x > p1.x) ? -1: 1 ) * NODE_RADIUS * Math.sin(degree),
+        p1.y + ((p2.y > p1.y) ? 1 : -1) * NODE_RADIUS * Math.cos(degree));
 }
 const getEdgeEnd = (p1: Point, p2: Point) => getEdgeStart(p2, p1);
 

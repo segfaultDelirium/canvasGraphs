@@ -29,15 +29,7 @@ function drawNode(context, p) {
 }
 function getEdgeStart(p1, p2) {
     var degree = Math.atan((p2.x - p1.x) / (p2.y - p1.y));
-    var x = NODE_RADIUS * Math.sin(degree);
-    var y = NODE_RADIUS * Math.cos(degree);
-    // p1.print();
-    // p2.print();
-    var xStart = (p2.x > p1.x) ? p1.x - x : p1.x + x;
-    var yStart = (p2.y > p1.y) ? p1.y + y : p1.y - y;
-    var edgeStartPoint = new Point(xStart, yStart);
-    // edgeStartPoint.print();
-    return edgeStartPoint;
+    return new Point(p1.x + ((p2.x > p1.x) ? -1 : 1) * NODE_RADIUS * Math.sin(degree), p1.y + ((p2.y > p1.y) ? 1 : -1) * NODE_RADIUS * Math.cos(degree));
 }
 var getEdgeEnd = function (p1, p2) { return getEdgeStart(p2, p1); };
 function drawEdge(context, p1, p2) {
@@ -55,18 +47,6 @@ drawEdge(context, p1, p2);
 var p3 = new Point(183, 521);
 drawNode(context, p3);
 drawEdge(context, p3, p2);
-// function generateNodesInCircle(amount: number): Point[]{
-//     const bigCircleRadius = 140;
-//     const bigCircleMiddle = new Point(300, 300);
-//     const degreeDiff = Math.PI/180 * 360/amount;
-//     let pointsArray: Point[] = []
-//     for(let i = 0, currentDegree = 0; i < amount; i++, currentDegree += degreeDiff){
-//         let x = bigCircleMiddle.x + Math.cos(currentDegree) * bigCircleRadius;
-//         let y = bigCircleMiddle.y + Math.sin(currentDegree) * bigCircleRadius;
-//         pointsArray.push( new Point(x, y));
-//     }
-//     return pointsArray;
-// }
 function generateNodesInCircle(amount) {
     return generateNodeInCircleOuter(amount)();
 }
@@ -87,11 +67,6 @@ function generateNodeInCircleOuter(startingAmount) {
     }
     return generateNodeInCircle;
 }
-// function generateNodeInCircle(nodesGenerated: Point[], amountLeft: number): Point[]{
-//     if(amountLeft == 0) return nodesGenerated;
-//     const newNode = new Point(34, 54);
-//     return generateNodeInCircle( [...nodesGenerated, newNode], amountLeft-1);
-// }
 function drawNodesInCircle(context, amount) {
     console.log(generateNodesInCircle(amount));
     generateNodesInCircle(amount).forEach(function (node) { return drawNode(context, node); });
