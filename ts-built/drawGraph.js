@@ -47,9 +47,6 @@ drawEdge(context, p1, p2);
 var p3 = new Point(183, 521);
 drawNode(context, p3);
 drawEdge(context, p3, p2);
-function generateNodesInCircle(amount) {
-    return generateNodeInCircleOuter(amount)();
-}
 function generateNodeInCircleOuter(startingAmount) {
     var bigCircleRadius = 140;
     var bigCircleMiddle = new Point(300, 300);
@@ -60,15 +57,12 @@ function generateNodeInCircleOuter(startingAmount) {
         if (degree === void 0) { degree = 0; }
         if (amountLeft == 0)
             return nodesGenerated;
-        var x = bigCircleMiddle.x + Math.cos(degree) * bigCircleRadius;
-        var y = bigCircleMiddle.y + Math.sin(degree) * bigCircleRadius;
-        var newNode = new Point(x, y);
+        var newNode = new Point(bigCircleMiddle.x + Math.cos(degree) * bigCircleRadius, bigCircleMiddle.y + Math.sin(degree) * bigCircleRadius);
         return generateNodeInCircle(__spreadArrays(nodesGenerated, [newNode]), amountLeft - 1, degree + degreeDiff);
     }
-    return generateNodeInCircle;
+    return generateNodeInCircle();
 }
 function drawNodesInCircle(context, amount) {
-    console.log(generateNodesInCircle(amount));
-    generateNodesInCircle(amount).forEach(function (node) { return drawNode(context, node); });
+    generateNodeInCircleOuter(amount).forEach(function (node) { return drawNode(context, node); });
 }
 drawNodesInCircle(context, 8);
