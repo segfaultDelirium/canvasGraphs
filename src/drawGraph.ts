@@ -27,13 +27,9 @@ function getEdgeStart(p1: Point, p2: Point){
     const degree = Math.atan((p2.x - p1.x)/(p2.y - p1.y));
     const x = NODE_RADIUS * Math.sin(degree);
     const y = NODE_RADIUS * Math.cos(degree);
-    // p1.print();
-    // p2.print();
     const xStart = (p2.x > p1.x) ? p1.x - x : p1.x + x;
     const yStart = (p2.y > p1.y) ? p1.y + y : p1.y - y;
-    const edgeStartPoint = new Point(xStart, yStart);
-    // edgeStartPoint.print();
-    return edgeStartPoint;
+    return new Point(xStart, yStart);
 }
 const getEdgeEnd = (p1: Point, p2: Point) => getEdgeStart(p2, p1);
 
@@ -56,18 +52,6 @@ let p3 = new Point(183, 521)
 drawNode(context, p3)
 drawEdge(context, p3, p2)
 
-// function generateNodesInCircle(amount: number): Point[]{
-//     const bigCircleRadius = 140;
-//     const bigCircleMiddle = new Point(300, 300);
-//     const degreeDiff = Math.PI/180 * 360/amount;
-//     let pointsArray: Point[] = []
-//     for(let i = 0, currentDegree = 0; i < amount; i++, currentDegree += degreeDiff){
-//         let x = bigCircleMiddle.x + Math.cos(currentDegree) * bigCircleRadius;
-//         let y = bigCircleMiddle.y + Math.sin(currentDegree) * bigCircleRadius;
-//         pointsArray.push( new Point(x, y));
-//     }
-//     return pointsArray;
-// }
 
 function generateNodesInCircle(amount: number): Point[]{
     return generateNodeInCircleOuter(amount)();
@@ -90,13 +74,6 @@ function generateNodeInCircleOuter(startingAmount: number){
     }
     return generateNodeInCircle
 }
-
-// function generateNodeInCircle(nodesGenerated: Point[], amountLeft: number): Point[]{
-//     if(amountLeft == 0) return nodesGenerated;
-//     const newNode = new Point(34, 54);
-//     return generateNodeInCircle( [...nodesGenerated, newNode], amountLeft-1);
-// }
-
 
 function drawNodesInCircle(context: CanvasRenderingContext2D, amount: number){
     console.log(generateNodesInCircle(amount))
