@@ -13,8 +13,5 @@
   "type": "module",
   "devDependencies": {
     "lite-server": "^2.6.1"
-  },
-  "dependencies": {
-    "uuid": "^8.3.2"
   }
 }
