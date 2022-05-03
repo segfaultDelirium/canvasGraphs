@@ -1,3 +1,4 @@
+import {Point, Graph, GraphNode, Edge} from './classes.js';
 const canvas: HTMLCanvasElement = document.querySelector('canvas')! as HTMLCanvasElement;
 // const width = canvas.offsetWidth;
 // const height = canvas.offsetHeight;
@@ -5,21 +6,11 @@ const NODE_RADIUS = 30
 
 const context = canvas.getContext('2d')!;
 
-class Point{
-    x: number;
-    y: number;
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-    }
-    print = () => console.log(`Point: x=${this.x}, y=${this.y}`);
-}
-
-function drawNode(context: CanvasRenderingContext2D, p: Point){
-    context.moveTo(p.x + NODE_RADIUS, p.y);
+function drawNode(context: CanvasRenderingContext2D, node: GraphNode){
+    context.moveTo(node.x + NODE_RADIUS, node.y);
     context.fillStyle = '777777';
     context.strokeStyle = '333333';
-    context.arc(p.x , p.y , NODE_RADIUS, 0, 360, false);
+    context.arc(node.x , node.y , NODE_RADIUS, 0, 360, false);
     context.stroke();
 }
 
@@ -38,22 +29,13 @@ function drawEdge(context: CanvasRenderingContext2D, p1: Point, p2: Point){
     context.stroke()
 }
 
-const p1 = new Point(70, 145);
-const p2 = new Point(410, 85);
-
-drawNode(context, p1)
-drawNode(context, p2)
-drawEdge(context, p1, p2)
-
-let p3 = new Point(183, 521)
-drawNode(context, p3)
-drawEdge(context, p3, p2)
-
-function generateNodeInCircleOuter(startingAmount: number){
+function generateNodesInCircle(startingAmount: number){
     const bigCircleRadius = 140;
     const bigCircleMiddle = new Point(300, 300);
     const degreeDiff = Math.PI/180 * 360/startingAmount;
-    function generateNodeInCircle(nodesGenerated: Point[] = [], amountLeft: number = startingAmount, degree: number = 0): Point[]{
+    function generateNodeInCircle(nodesGenerated: Point[] = [],
+                                  amountLeft: number = startingAmount,
+                                  degree: number = 0): Point[]{
         if(amountLeft == 0) return nodesGenerated;
         const newNode = new Point(bigCircleMiddle.x + Math.cos(degree) * bigCircleRadius,
             bigCircleMiddle.y + Math.sin(degree) * bigCircleRadius);
@@ -66,8 +48,28 @@ function generateNodeInCircleOuter(startingAmount: number){
     return generateNodeInCircle();
 }
 
-function drawNodesInCircle(context: CanvasRenderingContext2D, amount: number){
-    generateNodeInCircleOuter(amount).forEach( node => drawNode(context, node));
-}
+// function drawNodesInCircle(context: CanvasRenderingContext2D, amount: number){
+//     const nodesInCircle: Point[] = generateNodesInCircle(amount);
+//     nodesInCircle.forEach( node => drawNode(context, node));
+//     // nodesInCircle.forEach( node =>{
+//     //     const amountOfEdges
+//     // } )
+// }
 
-drawNodesInCircle(context, 8);
+const node1 = new GraphNode(70, 145);
+const node2 = new GraphNode(410, 85);
+
+drawNode(context, node1)
+drawNode(context, node2)
+drawEdge(context, node1, node2)
+
+let node3 = new GraphNode(183, 521)
+drawNode(context, node3)
+drawEdge(context, node3, node2)
+
+const graph = new Graph();
+graph.addNode(node1);
+
+
+// drawNodesInCircle(context, 8);
+
