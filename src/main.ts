@@ -38,24 +38,6 @@ function generateNodesInCircle(startingAmount: number){
     return generateNodeInCircle();
 }
 
-// // random in a way that nodes are connected randomly and random amount of edges
-// function generateRandomTree(nodesAmount: number){
-//     const nodes = generateNodesInCircle(nodesAmount);
-//     let connectedNodes: GraphNode[] = [nodes[0]];
-//     let edges: Edge[] = [];
-//     while(connectedNodes.length != nodes.length){
-//         let unconnectedNodes = nodes.filter(n => connectedNodes.indexOf(n) == -1)
-//         let unconnectedNode = unconnectedNodes[Math.floor(Math.random() * unconnectedNodes.length)]
-//         let connectedNode: GraphNode = connectedNodes[Math.floor(Math.random() * connectedNodes.length)]
-//         const randomWeight =  Math.floor( 1 + (Math.random()) * 10);
-//         let newEdge = connectedNode.connect(unconnectedNode, randomWeight)
-//         edges = [...edges, newEdge];
-//         connectedNodes = [...connectedNodes, unconnectedNode];
-//     }
-//
-//     return {nodes, edges};
-// }
-
 type Tree = {
     nodes: GraphNode[]
     edges: Edge[]
