@@ -3,7 +3,7 @@ import {Edge} from "./Edge.js";
 import {GraphNode} from "./GraphNode.js";
 
 // class that holds all visible GraphNodes and Edges
-export class Graph{
+export class VisibleGraph{
     nodes: GraphNode[] = [];
     edges: Edge[] = []
 
