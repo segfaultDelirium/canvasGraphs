@@ -12,11 +12,14 @@ export class GraphNode extends Point{
         super(x, y);
     }
 
-    connect(node: GraphNode){
+    connect(node: GraphNode, weight?: number){
         this.connectedNodes = [...this.connectedNodes, node];
         node.connectedNodes = [...node.connectedNodes, this];
-        this.edges = [...this.edges, new Edge(this, node)];
+        const edge = new Edge(this, node, weight)
+        this.edges = [...this.edges, edge];
+        return edge;
     }
+
 
     disconnect(node: GraphNode){
         // TODO

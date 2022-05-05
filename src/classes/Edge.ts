@@ -27,8 +27,9 @@ export class Edge{
 
     static getStartPoint(p1: Point, p2: Point){
         const degree = Math.atan((p2.x - p1.x)/(p2.y - p1.y));
-        return new Point(p1.x + ((p2.x > p1.x) ? -1: 1 ) * NODE_RADIUS * Math.sin(degree),
-            p1.y + ((p2.y > p1.y) ? 1 : -1) * NODE_RADIUS * Math.cos(degree));
+        let x = p1.x + ((p2.x > p1.x) ? 1: -1 ) * NODE_RADIUS * Math.abs(Math.sin(-degree));
+        let y = p1.y + ((p2.y > p1.y) ? 1 : -1) * NODE_RADIUS * Math.abs(Math.cos(degree));
+        return new Point(x, y);
     }
     getStartPoint(){
         return Edge.getStartPoint(this.startNode, this.endNode)

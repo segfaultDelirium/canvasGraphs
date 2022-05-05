@@ -24,10 +24,10 @@ export class Graph{
     }
 
     draw(context: CanvasRenderingContext2D){
-        console.log('starting to draw')
+        // console.log('starting to draw')
         this.nodes.forEach(node => drawNode(context, node));
         this.edges.forEach(edge => drawEdge(context, edge));
-        console.log('finished drawing')
+        // console.log('finished drawing')
     }
 }
 
