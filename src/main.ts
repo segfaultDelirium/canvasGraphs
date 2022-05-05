@@ -61,7 +61,28 @@ function generateRandomTree(nodesAmount: number){
     return generateRandomTreeRec();
 }
 
-let randomTree = generateRandomTree(8);
+function generateRandomGraph(nodesAmount: number): Graph{
+    let randomTree = generateRandomTree(nodesAmount);
+    let nodes = randomTree.nodes;
+    let edges = randomTree.edges;
+    const maxEdgesAmount = nodes.length * (nodes.length-1)/2
+    const amountOfEdgesToAdd = Math.floor(Math.random() * (maxEdgesAmount - edges.length + 1));
+    console.log(`amountOfEdgesToAdd = ${amountOfEdgesToAdd}`)
+    for(let i = 0; i < amountOfEdgesToAdd; i++){
+        let node1 = nodes[Math.floor(Math.random() * nodes.length)];
+        let node2 = nodes[Math.floor(Math.random() * nodes.length)];
+        while(node1.id == node2.id || node1.connectedNodes.includes(node2)){
+            node1 = nodes[Math.floor(Math.random() * nodes.length)];
+            node2 = nodes[Math.floor(Math.random() * nodes.length)];
+        }
+        const randomWeight =  Math.floor( 1 + (Math.random()) * 10);
+        const newEdge = node1.connect(node2, randomWeight);
+        edges = [...edges, newEdge];
+    }
+    return {nodes: nodes, edges: edges};
+}
+
+let randomTree = generateRandomGraph(4);
 let nodes = randomTree.nodes;
 let edges = randomTree.edges;
 nodes.forEach(n => graph.addNode(n));
