@@ -5,3 +5,8 @@ export type Graph = {
     nodes: GraphNode[]
     edges: Edge[]
 }
+
+export type Path = {
+    node: GraphNode,
+    path: GraphNode[]
+}
