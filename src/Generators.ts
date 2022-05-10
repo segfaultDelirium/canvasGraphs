@@ -46,7 +46,7 @@ export function generateRandomGraph(nodesAmount: number): Graph{
     let edges = randomTree.edges;
     const maxEdgesAmount = nodes.length * (nodes.length-1)/2
     const amountOfEdgesToAdd = Math.floor(Math.random() * (maxEdgesAmount - edges.length + 1));
-    console.log(`amountOfEdgesToAdd = ${amountOfEdgesToAdd}`)
+    // console.log(`amountOfEdgesToAdd = ${amountOfEdgesToAdd}`)
     for(let i = 0; i < amountOfEdgesToAdd; i++){
         let node1 = nodes[Math.floor(Math.random() * nodes.length)];
         let node2 = nodes[Math.floor(Math.random() * nodes.length)];
