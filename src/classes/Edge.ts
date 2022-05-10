@@ -37,4 +37,10 @@ export class Edge{
     getEndPoint(){
         return Edge.getStartPoint(this.endNode, this.startNode);
     }
+
+    getOtherEnd(node: GraphNode){
+        if(node.id == this.startNode.id)return this.endNode;
+        else if(node.id == this.endNode.id) return this.startNode
+        else throw new Error(`the given node of id ${node.id} is not part of this edge`);
+    }
 }
