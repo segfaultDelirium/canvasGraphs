@@ -7,6 +7,10 @@ export class VisibleGraph{
     nodes: GraphNode[] = [];
     edges: Edge[] = []
 
+    constructor(nodes?: GraphNode[], edges?: Edge[]) {
+        if(nodes) this.nodes = nodes;
+        if(edges) this.edges = edges;
+    }
     addNode(node: GraphNode){
         if(this.nodes.filter(n => n.id == node.id).length > 0){
             console.warn('trying to add node that already exist in nodes array');
