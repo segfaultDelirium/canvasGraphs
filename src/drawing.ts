@@ -10,6 +10,8 @@ export function drawNode(context: CanvasRenderingContext2D, node: GraphNode){
     context.strokeStyle = '333333';
     context.arc(node.x , node.y , NODE_RADIUS, 0, 360, false);
     context.stroke();
+    context.font = "20px Arial";
+    context.fillText( `${node.id}`,node.x + 20, node.y + 10);
 }
 
 export function drawEdge(context: CanvasRenderingContext2D, edge: Edge){
